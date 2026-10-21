@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#080b14" />
   <meta name="description" content="AETHER English — 美式英语沉浸式学习系统。每日自动更新、5000 高频词、音标、完整时态与语法、听力、跟读和复习。" />
-  <title>AETHER English V4.1 — 严格词义配图与即时美式朗读</title>
+  <title>AETHER English V5 — 零基础造句与 55 章语法全解</title>
   <style>
 /* System font stack: no external font server required. */
 :root{font-family:Manrope,'PingFang SC',system-ui,sans-serif;color-scheme:dark;--bg:#080b14;--surface:rgba(19,23,38,.82);--surface-light:rgba(25,30,47,.84);--stroke:rgba(184,190,219,.14);--fg:#f3f1f4;--muted:#a7aab9;--faint:#797f95;--accent:#d0b48b;--accent-bright:#efcfaa;--blue:#879cda;--green:#8cccaa;--red:#e9a5a5;--glow:rgba(198,153,110,.14);--depth:0 22px 90px rgba(0,0,0,.19)}
@@ -120,6 +120,63 @@
 .assoc-plain-cn{font-size:20px;line-height:1.55;color:#e8cfa5}
 .assoc-meaning-only p{font-size:12px;line-height:1.8;opacity:.8;max-width:630px;margin:4px 0 0;color:#e3e2ee}
 @media(max-width:640px){.assoc-meaning-only{padding:24px 18px;min-height:170px}}
+
+/* BEGIN AETHER BEGINNER GRAMMAR AND SENTENCE LAB */
+.sb-jump{margin:20px 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.sb-jump-card{padding:24px!important;display:block;text-decoration:none;color:inherit;min-height:154px;transition:transform .18s ease,border-color .18s ease}
+.sb-jump-card:hover{transform:translateY(-3px);border-color:var(--accent)}
+.sb-jump-card h3{font-size:22px;margin:14px 0 8px;font-weight:550}
+.sb-jump-card p{font-size:13px;color:var(--muted);line-height:1.8}
+.sb-builder-panel{padding:23px;margin:22px 0}
+.sb-section-kicker{font-size:11px;letter-spacing:.16em;color:var(--accent);font-weight:600;margin-bottom:11px}
+.sb-section-title{font-size:clamp(19px,3.5vw,27px);margin:0 0 13px;font-weight:600}
+.sb-help{font-size:13px;color:var(--muted);line-height:1.85;margin:9px 0 14px}
+.sb-chip-row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 22px;max-width:100%}
+.sb-chip{font:inherit;font-size:13px;line-height:1.3;padding:10px 14px;border:1px solid var(--stroke);border-radius:11px;background:var(--surface-light);color:var(--fg);cursor:pointer;transition:background .15s,border-color .15s}
+.sb-chip.selected{border-color:var(--accent);color:var(--accent-bright);background:color-mix(in srgb,var(--accent) 16%,transparent)}
+.sb-chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sb-voice-line{display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap}
+.sb-sentence{font-size:clamp(23px,4.5vw,39px);font-weight:600;letter-spacing:-.018em;line-height:1.5;overflow-wrap:anywhere}
+.sb-tokens{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:19px 0}
+.sb-token{display:inline-flex;flex-direction:column;min-width:50px;border:1px solid var(--stroke);border-radius:11px;padding:10px 12px 9px;background:var(--surface-light);text-align:center;line-height:1.4}
+.sb-token strong{font-size:clamp(15px,3vw,21px);font-weight:600;overflow-wrap:anywhere}
+.sb-token small{font-size:10px;letter-spacing:.05em;margin-top:6px;opacity:.8}
+.sb-token.sb-s{border-bottom:3px solid #79b8d5}
+.sb-token.sb-aux{border-bottom:3px solid #d5ba79}
+.sb-token.sb-neg{border-bottom:3px solid #e28c90}
+.sb-token.sb-v{border-bottom:3px solid #8fc8ae}
+.sb-token.sb-o{border-bottom:3px solid #b6a5db}
+.sb-token.sb-t{border-bottom:3px solid #d7a98d}
+.sb-breakdown{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:18px 0}
+.sb-breakdown div{border:1px solid var(--stroke);border-radius:10px;padding:13px;font-size:12px;line-height:1.8;color:var(--muted)}
+.sb-notice{padding:15px 17px;border-left:2px solid var(--accent);border-radius:0 11px 11px 0;background:var(--surface-light);font-size:13px;line-height:1.85;margin:16px 0}
+.sb-mini-title{font-size:12px;letter-spacing:.09em;color:var(--accent);font-weight:600;margin:18px 0 9px}
+.sb-word-guide{margin:22px 0;padding:20px 19px;border:1px solid var(--stroke);background:var(--surface-light);border-radius:16px}
+.sb-guide-phrase{font-size:19px;font-weight:600;margin:8px 0;overflow-wrap:anywhere;color:var(--fg)}
+.sb-guide-tag{display:inline-flex;align-items:center;margin:0 7px 7px 0;padding:5px 9px;font-size:11px;border-radius:7px;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent-bright)}
+.sb-guide-example{font-size:16px;line-height:1.7;margin:12px 0 0;font-weight:500}
+.sb-guide-translation{font-size:13px;color:var(--muted);margin:4px 0 12px;line-height:1.7}
+.sb-guide-note{font-size:12px;color:var(--muted);line-height:1.8}
+.sb-builder-select{color:var(--fg);border:1px solid var(--stroke);border-radius:10px;background:var(--surface-light);font-size:15px;padding:11px 14px;max-width:100%;min-width:0;width:100%}
+.sb-builder-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.sb-study-link{font-size:13px;font-weight:600;line-height:1.5;padding:11px 15px;margin-top:10px}
+.sb-atlas-grid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:19px;align-items:start;margin-top:19px}
+.sb-atlas-nav{padding:12px;max-height:min(70vh,680px);overflow:auto}
+.sb-atlas-item{display:flex;align-items:center;gap:7px;text-align:left;width:100%;border:0;border-radius:9px;background:transparent;font:inherit;color:var(--fg);padding:12px;font-size:12px;line-height:1.6}
+.sb-atlas-item.active{background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent-bright)}
+.sb-atlas-num{font:10px monospace;opacity:.65;width:29px;flex:0 0 auto}
+.sb-atlas-lesson{padding:23px;min-width:0}
+.sb-atlas-formula{font-size:clamp(16px,3vw,23px);line-height:1.7;font-weight:600;color:var(--accent-bright);overflow-wrap:anywhere}
+.sb-atlas-example{font-size:21px;line-height:1.7;margin:11px 0;overflow-wrap:anywhere}
+.sb-atlas-translation{color:var(--muted);font-size:14px;line-height:1.65;margin-bottom:20px}
+.sb-quiz-options{display:flex;flex-direction:column;gap:9px;margin:16px 0}
+.sb-quiz-options .sb-chip{text-align:left;width:100%;padding:15px}
+.sb-quiz-options .sb-chip.correct{border-color:#8bc9aa;color:#8bc9aa}
+.sb-quiz-options .sb-chip.wrong{border-color:#d38a8a;color:#d38a8a}
+.sb-quiz-feedback{padding:15px;border-left:2px solid var(--accent);background:var(--surface-light);font-size:13px;line-height:1.8}
+@media(max-width:900px){.sb-atlas-grid{grid-template-columns:1fr}.sb-atlas-nav{max-height:260px}.sb-builder-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:650px){.sb-jump{grid-template-columns:1fr;gap:9px}.sb-jump-card{min-height:125px}.sb-builder-panel,.sb-atlas-lesson{padding:16px}.sb-chip{padding:9px 11px;font-size:12px}.sb-breakdown{grid-template-columns:1fr}.sb-builder-grid{grid-template-columns:1fr}.sb-atlas-nav{max-height:210px}.sb-tokens{gap:6px}.sb-token{padding:8px 9px}.sb-atlas-example{font-size:18px}}
+/* END AETHER BEGINNER GRAMMAR AND SENTENCE LAB */
 </style>
 </head>
 <body>
@@ -136,6 +193,8 @@
         <a href="#frequency" data-page="frequency" class="nav-link"><span class="nav-ico">▤</span>高频 5000 单词<span class="nav-en">5000 WORDS</span></a>
         <a href="#phonetics" data-page="phonetics" class="nav-link"><span class="nav-ico">◌</span>美式音标学习<span class="nav-en">US IPA</span></a>
         <a href="#tenses" data-page="tenses" class="nav-link"><span class="nav-ico">≡</span>时态 · 句型公式<span class="nav-en">STRUCTURES</span></a>
+        <a href="#sentence" data-page="sentence" class="nav-link"><span class="nav-ico">✎</span>零基础造句训练<span class="nav-en">SENTENCE LAB</span></a>
+        <a href="#grammarguide" data-page="grammarguide" class="nav-link"><span class="nav-ico">▦</span>55 章语法全解<span class="nav-en">GRAMMAR ATLAS</span></a>
         <a href="#grammar" data-page="grammar" class="nav-link"><span class="nav-ico">⌘</span>语法训练<span class="nav-en">GRAMMAR</span></a>
         <a href="#listening" data-page="listening" class="nav-link"><span class="nav-ico">◉</span>听力剧场<span class="nav-en">LISTEN</span></a>
         <a href="#speaking" data-page="speaking" class="nav-link"><span class="nav-ico">≋</span>跟读练习<span class="nav-en">SPEAK</span></a>
@@ -155,7 +214,7 @@
       <footer class="footer"><span>AETHER ENGLISH / BUILT FOR EVERYDAY PROGRESS</span><span>ORIGINAL LEARNING CONTENT · 2026</span></footer>
     </div>
   </div>
-  <div class="mobile-bottom" aria-label="快捷导航"><a href="#home" data-short="home">◈<small>首页</small></a><a href="#vocabulary" data-short="vocabulary">✦<small>每日</small></a><a href="#frequency" data-short="frequency">▤<small>5000词</small></a><a href="#listening" data-short="listening">◉<small>听力</small></a><a href="#review" data-short="review">↺<small>复习</small></a><a href="#progress" data-short="progress">▥<small>进度</small></a></div>
+  <div class="mobile-bottom" aria-label="快捷导航"><a href="#home" data-short="home">◈<small>首页</small></a><a href="#vocabulary" data-short="vocabulary">✦<small>每日</small></a><a href="#frequency" data-short="frequency">▤<small>5000词</small></a><a href="#sentence" data-short="sentence">✎<small>造句</small></a><a href="#listening" data-short="listening">◉<small>听力</small></a><a href="#review" data-short="review">↺<small>复习</small></a></div>
   <script>
 /* AETHER English — original bilingual teaching content. Fully offline. */
 window.AETHER_DATA = (() => {
@@ -353,6 +412,7 @@ return {sounds,tenses};
 })();
 
 </script>
+  <script src="./sentence-lab.js?v=1"></script>
   <script>
 /* AETHER English: browser-native learning engine. No paid API, no backend, no simulated AI grading. */
 (() => {
@@ -360,10 +420,12 @@ return {sounds,tenses};
 const D = window.AETHER_DATA;
 const R = window.AETHER_REFERENCE;
 const F = window.AETHER_FREQUENCY || [];
+const SL=window.AETHER_SENTENCE_LAB;
+if(!SL){document.body.textContent="造句与语法资料加载失败，请刷新页面。";return;}
 if (!R || F.length!==5000) {document.body.textContent='学习资料不完整，请将 frequency.js、reference.js 和原网站文件放在同一文件夹。';return;}
 if(!D){ document.body.textContent='课程资源加载失败。请确保 data.js 与 index.html 在同一文件夹。'; return; }
 const KEY='aether-english-progress-v1';
-const pages={home:'LEARNING SPACE',vocabulary:'DAILY WORDS',frequency:'5000 WORD LIBRARY',phonetics:'AMERICAN IPA',tenses:'GRAMMAR FORMULAS',grammar:'GRAMMAR STUDIO',listening:'LISTENING THEATER',speaking:'SPEAKING SPACE',expressions:'AMERICAN EXPRESSIONS',review:'MEMORY ENGINE',placement:'CEFR ESTIMATE',progress:'LEARNING INSIGHTS'};
+const pages={home:'LEARNING SPACE',vocabulary:'DAILY WORDS',frequency:'5000 WORD LIBRARY',phonetics:'AMERICAN IPA',tenses:'GRAMMAR FORMULAS',sentence:'SENTENCE BUILDER',grammarguide:'GRAMMAR ATLAS',grammar:'GRAMMAR STUDIO',listening:'LISTENING THEATER',speaking:'SPEAKING SPACE',expressions:'AMERICAN EXPRESSIONS',review:'MEMORY ENGINE',placement:'CEFR ESTIMATE',progress:'LEARNING INSIGHTS'};
 const $=(s,scope=document)=>scope.querySelector(s);
 const $$=(s,scope=document)=>Array.from(scope.querySelectorAll(s));
 // All course rollovers use Beijing time at 09:00. The date of a training day is its 09:00 launch date.
@@ -429,7 +491,7 @@ function render(){
  $('#crumb-current').textContent=pages[page];$('#streak-head').textContent=`✦ ${streak()} DAYS`;
  $('#theme-toggle').textContent=state.theme==='dark'?'☀':'☾';
  document.documentElement.dataset.theme=state.theme;
- const renderers={home:renderHome,vocabulary:renderVocab,frequency:renderFrequency,phonetics:renderPhonetics,tenses:renderTenses,grammar:renderGrammar,listening:renderListening,speaking:renderSpeaking,expressions:renderExpressions,review:renderReview,placement:renderPlacement,progress:renderProgress};
+ const renderers={home:renderHome,vocabulary:renderVocab,frequency:renderFrequency,phonetics:renderPhonetics,tenses:renderTenses,sentence:renderSentenceLab,grammarguide:renderGrammarAtlas,grammar:renderGrammar,listening:renderListening,speaking:renderSpeaking,expressions:renderExpressions,review:renderReview,placement:renderPlacement,progress:renderProgress};
  $('#main').innerHTML=`<div class="page-transition">${renderers[page]()}</div>`;
  $('#sidebar').classList.remove('open');$('#mobile-menu').setAttribute('aria-expanded','false');
  scheduleAudioPrefetch();
@@ -440,6 +502,8 @@ function renderHome(){
  <div class="grid-4"><div class="surface metric"><div class="metric-label">TODAY / 今日学习</div><div class="metric-number">${Math.floor(secs/60)}<small>/ 120 min</small></div><div class="bar"><span style="width:${pct}%"></span></div></div><div class="surface metric"><div class="metric-label">VOCABULARY / 已学词汇</div><div class="metric-number">${learned()}<small>/ ${extendedPool.length}</small></div><div class="metric-foot">5000 词参考库 + 每天 100 项</div></div><div class="surface metric"><div class="metric-label">REVIEW / 待复习</div><div class="metric-number">${due().length}<small>words</small></div><div class="metric-foot">SPACED REPETITION ACTIVE</div></div><div class="surface metric"><div class="metric-label">ESTIMATED / 学习等级</div><div class="metric-number">${state.level||'—'}</div><div class="metric-foot">${state.level?'站内训练等级':'完成分级测试后显示'}</div></div></div>
  <div class="section-heading"><div><div class="section-kicker">TODAY'S ROUTE / 120 MINUTES</div><h2>你的专属学习路径</h2></div><span class="subtle">可以按任意顺序开始</span></div>
  <div class="grid-3">${D.plan.map(([id,name,min],i)=>`<a class="surface module-card" href="#${id}"><div class="card-num">MODULE ${fmt(i+1)} / ${id.toUpperCase()}</div><h3>${name}</h3><p>${['每天 100 项新词/词条，北京时间 09:00 自动换课','语法测试 + 中文解析，错题计入记录','逐句聆听美式对话，跟读练习','真实场景的听力理解与原文解析','日常口语、缩略语和语境区分','科学安排下一次复习时间'][i]}</p><div class="card-min">${min} MIN · 已学 ${Math.floor(daySecs(id)/60)} MIN</div><div class="card-arrow">↗</div></a>`).join('')}</div>
+ <div class="section-heading"><div><div class="section-kicker">START HERE / 零基础先学这两节</div><h2>认识单词 → 学会造句 → 理解语法</h2></div></div>
+ <div class="sb-jump"><a class="surface sb-jump-card" href="#sentence"><div class="card-num">STEP 01 / SENTENCE LAB</div><h3>零基础造句</h3><p>从“我 + 学习 + 英语”开始，换人称、换时态，看每一部分怎么排列和变化。</p><div class="card-arrow">↗</div></a><a class="surface sb-jump-card" href="#grammarguide"><div class="card-num">STEP 02 / GRAMMAR ATLAS</div><h3>55 章语法全解</h3><p>主语、谓语、宾语、12 种时态、冠词、复数、助动词、从句、被动语态和常见错误。</p><div class="card-arrow">↗</div></a></div>
  <div class="section-heading"><div><div class="section-kicker">REFERENCE LIBRARIES</div><h2>三本独立学习手册</h2></div><span class="subtle">随时查阅，不计入每日解锁进度</span></div>
  <div class="grid-3"><a class="surface module-card" href="#frequency"><div class="card-num">LIBRARY / 01</div><h3>高频 5000 单词</h3><p>独立词库、IPA、搜索与逐词收听；每天约 100 项自动进入每日课程。</p><div class="card-arrow">↗</div></a><a class="surface module-card" href="#phonetics"><div class="card-num">LIBRARY / 02</div><h3>美式音标课堂</h3><p>元音、辅音、重读、弱读与连读；例词发音和口型技巧。</p><div class="card-arrow">↗</div></a><a class="surface module-card" href="#tenses"><div class="card-num">LIBRARY / 03</div><h3>时态与句型公式</h3><p>20 个结构单元，每个都有公式、肯定句、否定句、疑问句和小测验。</p><div class="card-arrow">↗</div></a></div>
  <p class="notice">Day ${fmt(autoDay())} 已解锁。课程材料预置在网页里，每天 09:00 自动切换约 100 项新词，无须重复上传；若想每天收到手机推送仍需单独接入通知服务。5000 词库已补全中文释义；只有语义匹配准确的词才显示联想图，其余显示不误导的词义卡。精编例句继续按词完善。</p>
@@ -451,7 +515,7 @@ function renderVocab(){
  if(!w)return '<div class="empty">词库尚未加载</div>';
  const item=state.cards[w.id];
  return `${head('01 / THE VOCABULARY LAB','Make words','yours.','每天解锁约 100 个新词。每个词都有中文解释与参考音标；语义准确的词才提供图形联想，其余提供文字释义；Day 1–2 有 80 个精编例句。')}${sessionWidget('vocabulary')}<div class="control-row"><label class="field-control">当前学习单元 <select id="day-select">${Array.from({length:autoDay()},(_,i)=>`<option value="${i+1}" ${state.day===i+1?'selected':''}>DAY ${fmt(i+1)} ${i===0?'· Everyday Life':i===1?'· Work & Study':'· 高频词训练'}</option>`).join('')}</select></label><div class="stat-chip">${wordIndex+1} / ${deck.length} WORDS</div><div class="stat-chip">每日课程 ${maxDay} 天 · 已学 ${learned()} 个</div></div><div class="bar"><span style="width:${(wordIndex+1)/deck.length*100}%"></span></div>
- <div id="word-card" class="surface study-spotlight" aria-live="polite"><div class="module-eyebrow">WORD / ${fmt(wordIndex+1)} ${item?.seen?'· 已学过':'· NEW DISCOVERY'}</div><h2 class="flash-word">${escapeHTML(w.word)}</h2><div class="ipa">${escapeHTML(w.ipa)}</div>${wordArtwork(w)}<div class="btn-row" style="margin-top:16px"><button class="pill-btn" data-word-audio="${escapeHTML(w.word)}">▶ 即时美式发音</button><button class="pill-btn" data-say="${escapeHTML(w.example)}">▶ 例句</button></div><div class="word-cn" style="${showWord?'':'filter:blur(6px)'}">${escapeHTML(w.cn||'中文释义可在5000词库查看')}</div><div class="word-definition" style="${showWord?'':'filter:blur(6px)'}">${escapeHTML(w.en||'请结合中文释义和联想图记忆；英文精编释义按词完善。')}</div><div class="example">${w.example?'“'+escapeHTML(w.example)+'”':'请听原词发音，并用所学句型尝试造句。'}</div><div class="card-actions"><button class="primary-btn" data-grade="good">认识 · Good</button><button class="ghost-btn" data-grade="hard">模糊 · Hard</button><button class="outline-btn" data-grade="again">不认识 · Again</button><button class="pill-btn" data-action="toggle-word">${showWord?'隐藏释义':'显示释义'}</button></div><div class="tap-help">向左滑切换下一词，向右滑返回上一词。复习间隔根据回答自动调整。</div></div><div class="top-line" style="margin:14px 0 30px"><button class="outline-btn" data-action="word-prev" ${wordIndex===0?'disabled':''}>← 上一词</button><button class="outline-btn" data-action="word-next">下一词 →</button></div><div class="notice">首次 Good：3 天后复习；Hard：1 天；Again：1 分钟；Easy 在复习模块中可选。认识不等于永久掌握。</div>`;
+ <div id="word-card" class="surface study-spotlight" aria-live="polite"><div class="module-eyebrow">WORD / ${fmt(wordIndex+1)} ${item?.seen?'· 已学过':'· NEW DISCOVERY'}</div><h2 class="flash-word">${escapeHTML(w.word)}</h2><div class="ipa">${escapeHTML(w.ipa)}</div>${wordArtwork(w)}${renderWordUsage(w)}<div class="btn-row" style="margin-top:16px"><button class="pill-btn" data-word-audio="${escapeHTML(w.word)}">▶ 即时美式发音</button><button class="pill-btn" data-say="${escapeHTML(w.example)}">▶ 例句</button></div><div class="word-cn" style="${showWord?'':'filter:blur(6px)'}">${escapeHTML(w.cn||'中文释义可在5000词库查看')}</div><div class="word-definition" style="${showWord?'':'filter:blur(6px)'}">${escapeHTML(w.en||'请结合中文释义和联想图记忆；英文精编释义按词完善。')}</div><div class="example">${w.example?'“'+escapeHTML(w.example)+'”':'请听原词发音，并用所学句型尝试造句。'}</div><div class="card-actions"><button class="primary-btn" data-grade="good">认识 · Good</button><button class="ghost-btn" data-grade="hard">模糊 · Hard</button><button class="outline-btn" data-grade="again">不认识 · Again</button><button class="pill-btn" data-action="toggle-word">${showWord?'隐藏释义':'显示释义'}</button></div><div class="tap-help">向左滑切换下一词，向右滑返回上一词。复习间隔根据回答自动调整。</div></div><div class="top-line" style="margin:14px 0 30px"><button class="outline-btn" data-action="word-prev" ${wordIndex===0?'disabled':''}>← 上一词</button><button class="outline-btn" data-action="word-next">下一词 →</button></div><div class="notice">首次 Good：3 天后复习；Hard：1 天；Again：1 分钟；Easy 在复习模块中可选。认识不等于永久掌握。</div>`;
 }
 // Three separate reference libraries, available without external services.
 function association(w){
@@ -550,7 +614,7 @@ function renderFrequency(){
  freqPage=Math.min(maxPage,Math.max(0,freqPage));
  const rows=filtered.slice(freqPage*pageSize,(freqPage+1)*pageSize);
  const current=freqSelected===null?null:libraryWords[freqSelected];
- const detail=current?`<section class="surface vocab-detail" id="freq-detail"><div class="module-eyebrow">WORD DETAIL / ${current.level} / ${current.rank} OF 5000</div><h2 class="flash-word">${escapeHTML(current.word)}</h2><div class="ipa">${escapeHTML(current.ipa)}</div><div class="word-cn large-cn">${escapeHTML(current.cn)}</div>${wordArtwork(current)}${current.en?`<p class="word-definition">${escapeHTML(current.en)}</p>`:''}${current.example?`<div class="example"><strong>真实语境例句</strong><p>${escapeHTML(current.example)}</p>${current.exampleCn?`<small class="example-cn">${escapeHTML(current.exampleCn)}</small>`:''}</div>`:'<p class="voice-tips">这个词条已收录中文释义；精编英文例句仍在按词核对中。</p>'}<div class="btn-row" style="margin-top:22px"><button class="primary-btn" data-word-audio="${escapeHTML(current.word)}">▶ 即时美式发音</button>${current.example?`<button class="outline-btn" data-say="${escapeHTML(current.example)}">▶ 例句</button>`:''}<button class="ghost-btn" data-action="freq-learn" data-word-id="${current.id}">${state.cards[current.id]?.seen?'↺ 重新记忆':'✓ 记住这个词'}</button><button class="pill-btn" data-action="freq-close">收起词卡</button></div></section>`:"";
+ const detail=current?`<section class="surface vocab-detail" id="freq-detail"><div class="module-eyebrow">WORD DETAIL / ${current.level} / ${current.rank} OF 5000</div><h2 class="flash-word">${escapeHTML(current.word)}</h2><div class="ipa">${escapeHTML(current.ipa)}</div><div class="word-cn large-cn">${escapeHTML(current.cn)}</div>${wordArtwork(current)}${renderWordUsage(current)}${current.en?`<p class="word-definition">${escapeHTML(current.en)}</p>`:''}${current.example?`<div class="example"><strong>真实语境例句</strong><p>${escapeHTML(current.example)}</p>${current.exampleCn?`<small class="example-cn">${escapeHTML(current.exampleCn)}</small>`:''}</div>`:'<p class="voice-tips">这个词条已收录中文释义；精编英文例句仍在按词核对中。</p>'}<div class="btn-row" style="margin-top:22px"><button class="primary-btn" data-word-audio="${escapeHTML(current.word)}">▶ 即时美式发音</button>${current.example?`<button class="outline-btn" data-say="${escapeHTML(current.example)}">▶ 例句</button>`:''}<button class="ghost-btn" data-action="freq-learn" data-word-id="${current.id}">${state.cards[current.id]?.seen?'↺ 重新记忆':'✓ 记住这个词'}</button><button class="pill-btn" data-action="freq-close">收起词卡</button></div></section>`:"";
  return `${head('LIBRARY 01 / EVERYDAY ENGLISH','Words with','meaning.','5000 个分级英语单词，全部显示中文释义；点击任意单词查看中文解释、美式发音；仅展示逐词核对过的联想图，避免错误画面误导记忆。')}
  <div class="surface content-panel library-info"><div class="module-eyebrow">5,000 WORDS · A1—C1 LEARNING BANK</div><div class="grid-3" style="margin-top:17px"><div><b>5000</b><p>英汉双语词条</p></div><div><b>${libraryWords.filter(w=>state.cards[w.id]?.seen).length}</b><p>已标记学习</p></div><div><b>${autoDay()}/${maxDay}</b><p>已解锁 Day</p></div></div><p class="voice-tips">本版已更换原来混入文学人名的词表，改用 A1–C1 分级常用词整理；不是严格的美式口语频率排名。中文释义基于 ECDICT 公开英汉词典并对基础词额外校对；目前只对词义匹配确切的词条显示场景示意图；多义词和未核对词汇会显示文字记忆卡，避免误导。参考音标来源不同，遇到多音词请结合语音试听。</p></div>
  <div class="surface content-panel" style="margin-top:16px"><label class="field-control" style="display:block">中英文搜索<div class="word-search-row"><input class="library-search" id="freq-search" type="search" value="${escapeHTML(freqSearch)}" placeholder="输入单词或中文，例如 apple / 苹果" autocomplete="off"/><button class="primary-btn" data-action="freq-search">搜索</button><button class="outline-btn" data-action="freq-clear">清除</button></div></label><div class="cefr-filter">${["全部","A1","A2","B1","B2","C1"].map(l=>`<button type="button" class="cefr-chip ${freqFilter===l?'active':''}" data-freq-level="${l}">${l}</button>`).join("")}</div><div class="top-line" style="margin:17px 0"><span class="stat-chip">匹配 ${filtered.length} 个英汉词条</span><span class="stat-chip">第 ${freqPage+1} / ${maxPage+1} 页</span></div>
@@ -580,6 +644,82 @@ function renderPhonetics(){
  <section class="surface content-panel"><div class="section-heading" style="margin:0 0 17px"><div><div class="section-kicker">VOICE LAB / SOUND ENGINE</div><h2>发音升级设置</h2></div></div><div class="voice-settings"><label class="field-control">发音来源<select id="audio-source"><option value="smart" ${state.audioSource==='smart'?'selected':''}>推荐：极速智能 · 已预载真人音频 / 即时美式系统语音</option><option value="system" ${state.audioSource==='system'?'selected':''}>最快响应：只用设备美式语音（离线可用）</option></select></label><label class="field-control">美式系统语音<select id="voice-select"><option value="">自动选择设备较优美式声音</option>${voiceOptions}</select></label><label class="field-control">语速 <strong id="voice-rate-value">${Number(state.voiceRate||.96).toFixed(2)} ×</strong><input id="voice-rate" type="range" min="0.7" max="1.15" step="0.05" value="${state.voiceRate||.96}"/></label></div><div class="btn-row" style="margin-top:22px"><button class="primary-btn" data-action="voice-demo">▶ 试听当前声线</button><button class="outline-btn" data-action="voice-refresh">↻ 刷新美式声音</button><button class="outline-btn" data-action="stop-audio">■ 停止</button></div><p class="voice-tips">默认不再等网络请求：有缓存时立即播美式词典录音，尚未预载的单词立即用选定的设备美式声线朗读，同时后台准备词典音频供下次播放。可在这里选择声线、调节速度，点击「试听」比较自然度。整句话仍是设备语音；自然度受 Safari 和已安装声线限制，无法在无付费语音服务的情况下保证真人音质。</p></section>
  <div class="section-heading"><div><div class="section-kicker">IPA REFERENCE / ${R.sounds.length} ENTRIES</div><h2>音素与连读详解</h2></div></div><div class="tab-row ipa-tabs">${groups.map(g=>`<button class="tab ${phoneticGroup===g?'active':''}" data-ipa-group="${escapeHTML(g)}">${escapeHTML(g)}</button>`).join('')}</div><div class="ipa-grid">${selected.map(x=>`<article class="surface ipa-card"><div class="module-eyebrow">${escapeHTML(x.group)}</div><div class="ipa-symbol">${escapeHTML(x.ipa)}</div><div class="ipa-sample"><strong>${escapeHTML(x.example)}</strong><button class="pill-btn" data-word-audio="${escapeHTML(x.example)}">▶ 例词</button></div><p>${escapeHTML(x.tip)}</p></article>`).join('')}</div><p class="notice">不同美式地区口音可能合并 /ɑ/ 与 /ɔ/，部分教材对长元音、r 音和元音细分使用不同音标体系。此处采用常见美式宽式 IPA，例词用于听辨，不能保证 TTS 的孤立音素精确展示。</p>`;
 }
+
+/* BEGIN BEGINNER'S SENTENCE LAB */
+let sbSelection={subject:"I",verb:"study",tense:"present",mode:"positive"};
+let sbQuestion=0,sbAnswer=null,gaGroup="全部",gaChapter=0,sbFocusWord="";
+function sbButton(field,value,label,selected){
+ return '<button type="button" class="sb-chip'+(selected?' selected':'')+'" data-action="sb-change" data-field="'+escapeHTML(field)+'" data-value="'+escapeHTML(value)+'" aria-pressed="'+(selected?'true':'false')+'">'+escapeHTML(label)+'</button>';
+}
+function sbWordLink(word){
+ return '<button class="outline-btn sb-study-link" data-action="sb-from-word" data-value="'+escapeHTML(word)+'">✎ 进入造句课堂 →</button>';
+}
+function renderWordUsage(w){
+ const match=libraryWords.find(x=>x.word.toLowerCase()===String(w.word).toLowerCase());
+ const info=SL.usage(w.word,match?.rank||w.rank||1);
+ const labels=info.labels.map(x=>'<span class="sb-guide-tag">'+escapeHTML(x)+'</span>').join('');
+ const name=escapeHTML(w.word),custom=info.custom;
+ let content='<section class="sb-word-guide"><div class="sb-section-kicker">HOW TO USE / 这个单词如何放进句子</div>';
+ content+='<div>'+labels+'</div>';
+ if(custom){
+  content+='<div class="sb-mini-title">正确搭配与句型</div><div class="sb-guide-phrase">'+escapeHTML(custom.pattern)+'</div>';
+  content+='<p class="sb-guide-example">'+escapeHTML(custom.example)+'</p><p class="sb-guide-translation">'+escapeHTML(custom.cn)+'</p>';
+  content+='<p class="sb-guide-note">为什么这样用：'+escapeHTML(custom.note)+'</p>';
+ }else{
+  content+='<div class="sb-mini-title">词性决定这个单词可以放在哪里</div><div class="sb-guide-phrase">'+escapeHTML(info.structure[1])+'</div>';
+  content+='<p class="sb-guide-note">'+escapeHTML(info.structure[0])+'</p>';
+  content+='<p class="sb-guide-note">⚠️ 这是词性对应的通用位置公式，不是该词的专属造句例句。'+escapeHTML(info.structure[2])+'</p>';
+  if(w.example)content+='<p class="sb-guide-example">'+escapeHTML(w.example)+'</p>'+(w.exampleCn?'<p class="sb-guide-translation">'+escapeHTML(w.exampleCn)+'</p>':'');
+ }
+ content+=sbWordLink(w.word)+'</section>';
+ return content;
+}
+function renderSentenceLab(){
+ const b=SL.build(sbSelection);
+ const tokens=b.tokens.map(x=>'<span class="sb-token sb-'+escapeHTML(x.kind.toLowerCase())+'" title="'+escapeHTML(x.desc)+'"><strong>'+escapeHTML(x.text)+'</strong><small>'+escapeHTML(x.kind)+'</small></span>').join('');
+ const subjects=SL.subjects.map(x=>sbButton("subject",x.en,x.en+" · "+x.cn,sbSelection.subject===x.en)).join('');
+ const modes=SL.modes.map(x=>sbButton("mode",x.id,x.label,sbSelection.mode===x.id)).join('');
+ const tenseButtons=SL.tenses.map(x=>sbButton("tense",x.id,x.name,sbSelection.tense===x.id)).join('');
+ const verbs=SL.verbs.map(x=>'<option value="'+escapeHTML(x.base)+'"'+(x.base===sbSelection.verb?' selected':'')+'>'+escapeHTML(x.base+' '+x.object+' · '+x.cn)+'</option>').join('');
+ const q=SL.quizzes[sbQuestion%SL.quizzes.length];
+ let out=head('BEGINNER / SENTENCE LAB','Build a','sentence.','先把英文拼成句子，再认识每一部分。所有示范句都按明确的动词搭配生成，不会把不合适的词强行插进去。');
+ if(sbFocusWord){const item=libraryWords.find(x=>x.word.toLowerCase()===sbFocusWord.toLowerCase());if(item){
+  const g=SL.usage(item.word,item.rank);
+  out+='<div class="sb-notice"><b>你刚刚查询：</b>'+escapeHTML(item.word)+' · '+escapeHTML(item.cn)+'。'+(g.custom?'本词的专属句型已写在单词详情里。':'本词尚无人工核对的专属例句，请先学习句子结构和词性位置。')+'</div>';
+ }}
+ out+='<section class="surface sb-builder-panel"><div class="sb-section-kicker">STEP 01 · 主语 SUBJECT</div><h2 class="sb-section-title">谁做这件事？</h2><p class="sb-help">句子第一部分通常是主语，例如 I（我）、She（她）。切换 She 看动词怎么变化。</p><div class="sb-chip-row">'+subjects+'</div>';
+ out+='<div class="sb-section-kicker">STEP 02 · 动作与宾语 VERB + OBJECT</div><div class="sb-builder-grid"><label class="field-control">选择你想表达的动作 <select class="sb-builder-select" id="sb-verb">'+verbs+'</select></label><div><div class="sb-help">原形 / 第三人称单数 / 过去式 / 过去分词 / 现在分词</div><div class="sb-guide-phrase">'+escapeHTML([b.verb.base,b.verb.third,b.verb.past,b.verb.pp,b.verb.ing].join(' / '))+'</div></div></div>';
+ out+='<div class="sb-section-kicker" style="margin-top:25px">STEP 03 · 时态 TENSE</div><p class="sb-help">同一个动作可以放在现在、过去、未来，或者描述“正在进行”“已经完成”。初学者建议先练一般现在、一般过去、一般将来。</p><div class="sb-chip-row">'+tenseButtons+'</div>';
+ out+='<div class="sb-section-kicker">STEP 04 · 句子类型</div><div class="sb-chip-row">'+modes+'</div></section>';
+ out+='<section class="surface sb-builder-panel" id="sb-result"><div class="sb-voice-line"><div><div class="sb-section-kicker">YOUR SENTENCE · 英文造句结果</div><h2 class="sb-section-title">'+escapeHTML(b.tense.name)+' · '+escapeHTML(b.mode==="positive"?"肯定句":b.mode==="negative"?"否定句":"疑问句")+'</h2></div><button class="primary-btn" data-say="'+escapeHTML(b.sentence)+'">▶ 朗读整句话</button></div>';
+ out+='<div class="sb-sentence">'+escapeHTML(b.sentence)+'</div><p class="sb-help">'+escapeHTML(b.breakdown)+'</p><div class="sb-tokens">'+tokens+'</div>';
+ out+='<div class="sb-mini-title">每一个标签具体表示什么</div><div class="sb-breakdown">'+Object.entries(SL.parts).map(([k,v])=>'<div><b>'+escapeHTML(k)+'</b> · '+escapeHTML(v)+'</div>').join('')+'</div>';
+ out+='<div class="sb-notice"><b>时态用途：</b>'+escapeHTML(b.tense.hint)+'。<br><b>怎样组合：</b>'+escapeHTML(b.tense.key)+'<br><b>常见时间词：</b>'+escapeHTML(b.tense.signal)+'。</div><p class="sb-help">'+escapeHTML(b.note)+'</p>';
+ out+='<div class="btn-row"><button class="outline-btn" data-action="sb-explain">查看基础语法目录 ↗</button><button class="outline-btn" data-go="tenses">查看所有时态公式 ↗</button></div></section>';
+ out+='<section class="surface sb-builder-panel"><div class="sb-section-kicker">STEP 05 · 选择题 · IMMEDIATE FEEDBACK</div><h2 class="sb-section-title">轮到你来填空</h2><p class="sb-help">选择后会解释主语、助动词和动词应该怎样搭配。练习结果计入原有学习进度。</p><div class="module-eyebrow">QUESTION '+(sbQuestion%SL.quizzes.length+1)+' / '+SL.quizzes.length+'</div><h3 class="sb-atlas-example">'+escapeHTML(q.question)+'</h3>';
+ out+='<div class="sb-quiz-options">'+q.choices.map((v,i)=>'<button class="sb-chip'+(sbAnswer!==null?(v===q.answer?' correct':v===sbAnswer?' wrong':''):'')+'" data-action="sb-answer" data-index="'+i+'" '+(sbAnswer!==null?'disabled':'')+'>'+('ABC'[i])+'. '+escapeHTML(v)+'</button>').join('')+'</div>';
+ if(sbAnswer!==null)out+='<div class="sb-quiz-feedback"><b>'+(sbAnswer===q.answer?'✓ 回答正确':'✗ 正确答案：'+escapeHTML(q.answer))+'</b><p>'+escapeHTML(q.reason)+'</p></div>';
+ out+='<div class="btn-row"><button class="primary-btn" data-action="sb-next">'+(sbAnswer===null?'跳过这题':'下一题')+' →</button><button class="outline-btn" data-go="grammarguide">打开语法全解</button></div></section>';
+ return out;
+}
+function renderGrammarAtlas(){
+ const groups=['全部',...new Set(SL.chapters.map(x=>x.group))];
+ const filtered=SL.chapters.map((x,i)=>({...x,index:i})).filter(x=>gaGroup==='全部'||x.group===gaGroup);
+ if(!filtered.some(x=>x.index===gaChapter))gaChapter=filtered[0]?.index||0;
+ const chapter=SL.chapters[gaChapter];
+ let out=head('REFERENCE / GRAMMAR ATLAS','Understand the','rules.','55 章从基础句子成分到常用 B2 结构：公式 + 原创例句 + 中文翻译 + 常见错误。内容覆盖主要基础到中高级常见语法，不代表英语语法的全部例外。');
+ out+='<div class="sb-chip-row">'+groups.map(x=>'<button class="sb-chip'+(gaGroup===x?' selected':'')+'" data-action="ga-group" data-value="'+escapeHTML(x)+'">'+escapeHTML(x)+'</button>').join('')+'</div>';
+ out+='<div class="sb-atlas-grid"><aside class="surface sb-atlas-nav" aria-label="语法章节">'+filtered.map(x=>'<button class="sb-atlas-item'+(x.index===gaChapter?' active':'')+'" data-action="ga-chapter" data-value="'+x.index+'"><span class="sb-atlas-num">'+String(x.id).padStart(2,'0')+'</span><span>'+escapeHTML(x.title)+'</span></button>').join('')+'</aside>';
+ out+='<article class="surface sb-atlas-lesson"><div class="sb-section-kicker">CHAPTER '+String(chapter.id).padStart(2,'0')+' / '+SL.chapters.length+' · '+escapeHTML(chapter.group)+'</div><h2 class="sb-section-title">'+escapeHTML(chapter.title)+'</h2>';
+ out+='<div class="sb-mini-title">语法结构 / 组合公式</div><div class="sb-atlas-formula">'+escapeHTML(chapter.formula)+'</div>';
+ out+='<div class="sb-mini-title">真实英语示例</div><p class="sb-atlas-example">'+escapeHTML(chapter.example)+'</p><p class="sb-atlas-translation">'+escapeHTML(chapter.cn)+'</p>';
+ out+='<div class="sb-mini-title">为什么这样组合？</div><p class="sb-help">'+escapeHTML(chapter.explain)+'</p>';
+ out+='<div class="sb-notice"><b>⚠️ 常见错误：</b><br>'+escapeHTML(chapter.pitfall)+'</div>';
+ out+='<div class="btn-row"><button class="outline-btn" data-action="ga-prev">← 上一章</button><button class="primary-btn" data-action="ga-next">下一章 →</button><button class="outline-btn" data-go="sentence">✎ 动手造句</button></div>';
+ out+='<p class="sb-help">学习路线：先学第 01–06 章句子成分，再学第 07–18 章时态；随后学习冠词、代词、疑问句、比较、从句等。教材以美式英语初学者为主，遇到高级结构时可以先略读。</p></article></div>';
+ return out;
+}
+/* END BEGINNER'S SENTENCE LAB */
 function renderTenses(){
  const t=R.tenses[tenseIndex],quiz=t.quiz;
  return `${head('LIBRARY 03 / SENTENCE ENGINE','Master the','structure.','时态不是死背名称。每一章具体拆解主语、助动词、谓语动词及其变形，并练习肯定句、否定句和一般疑问句。')}
@@ -672,6 +812,16 @@ function playScene(){if(!('speechSynthesis'in window)){notify('此浏览器不�
 function startRecording(){if(recording){try{speechRec?.stop()}catch{}recording=false;const b=$('#speech-button');if(b)b.textContent='◉ 开始跟读';return}const Recognizer=window.SpeechRecognition||window.webkitSpeechRecognition;if(!Recognizer){notify('该浏览器不支持语音识别，请播放原句并使用下方手动自评。');const t=$('#speech-result');if(t)t.textContent='无法调用语音转文字。请自行对照原句发音、节奏与停顿。';return}try{speechRec=new Recognizer();speechRec.lang='en-US';speechRec.continuous=false;speechRec.interimResults=true;const result=$('#speech-result');speechRec.onresult=e=>{const phrases=Array.from(e.results).map(r=>r[0].transcript).join(' ');if(result)result.textContent=`识别文字：${phrases}\n（仅是转写，非发音评分）`};speechRec.onerror=e=>{recording=false;const b=$('#speech-button');if(b)b.textContent='◉ 开始跟读';if(result)result.textContent=`识别失败 (${e.error})。可改用手动自评。`};speechRec.onend=()=>{recording=false;const b=$('#speech-button');if(b)b.textContent='◉ 开始跟读'};speechRec.start();recording=true;const b=$('#speech-button');if(b)b.textContent='■ 结束跟读';if(result)result.textContent='正在收听，请朗读屏幕中的英语句子…'}catch(e){notify('无法启动麦克风：'+(e?.message||'请检查权限'));}}
 const placementReset=(mode)=>{placementMode=mode||'placement';placementIndex=0;placementResponses=[];placementChoice=null;placementFinished=false;render()};
 function processAction(el){const act=el.dataset.action;
+ if(act==='sb-change'){const field=el.dataset.field,value=el.dataset.value;if(['subject','verb','tense','mode'].includes(field)){sbSelection[field]=value;render();}return}
+ if(act==='sb-from-word'){sbFocusWord=el.dataset.value||'';const found=SL.verbs.find(x=>x.base===sbFocusWord.toLowerCase());if(found)sbSelection.verb=found.base;selectMode('sentence');return}
+ if(act==='sb-explain'){selectMode('grammarguide');return}
+ if(act==='sb-answer'){if(sbAnswer!==null)return;const q=SL.quizzes[sbQuestion%SL.quizzes.length];sbAnswer=q.choices[Number(el.dataset.index)];activity('grammar',sbAnswer===q.answer);render();return}
+ if(act==='sb-next'){sbQuestion=(sbQuestion+1)%SL.quizzes.length;sbAnswer=null;render();return}
+ if(act==='ga-group'){gaGroup=el.dataset.value;const c=SL.chapters.findIndex(x=>gaGroup==='全部'||x.group===gaGroup);gaChapter=Math.max(0,c);render();return}
+ if(act==='ga-chapter'){gaChapter=Math.max(0,Math.min(SL.chapters.length-1,Number(el.dataset.value)||0));render();document.querySelector('.sb-atlas-lesson')?.scrollIntoView({block:'start',behavior:'smooth'});return}
+ if(act==='ga-prev'){gaChapter=(gaChapter+SL.chapters.length-1)%SL.chapters.length;gaGroup='全部';render();return}
+ if(act==='ga-next'){gaChapter=(gaChapter+1)%SL.chapters.length;gaGroup='全部';render();return}
+
  if(el.dataset.go){selectMode(el.dataset.go);return}
  if(el.dataset.say){play(el.dataset.say);return}
  if(el.dataset.wordAudio){playWordAudio(el.dataset.wordAudio);return}
@@ -725,6 +875,7 @@ function processAction(el){const act=el.dataset.action;
 // Delegate all UI events: safe for dynamic pages.
 document.addEventListener('click',e=>{const el=e.target.closest('button');if(el?.dataset.action||el?.dataset.go||el?.dataset.say||el?.dataset.wordAudio||el?.dataset.freq!==undefined||el?.dataset.freqLevel!==undefined||el?.dataset.ipaGroup!==undefined||el?.dataset.tense!==undefined||el?.dataset.tenseAnswer!==undefined||el?.dataset.grade||el?.dataset.grammar!==undefined||el?.dataset.listening!==undefined||el?.dataset.scene!==undefined||el?.dataset.playLine!==undefined||el?.dataset.expression!==undefined||el?.dataset.exjump!==undefined||el?.dataset.review||el?.dataset.placement!==undefined)processAction(el)});
 document.addEventListener('change',e=>{
+ if(e.target.id==='sb-verb'){sbSelection.verb=e.target.value;render();return}
  if(e.target.id==='day-select'){state.day=Math.min(autoDay(),Math.max(1,Number(e.target.value)));wordIndex=0;persist();render()}
  if(e.target.id==='voice-select'){state.voiceURI=e.target.value;persist();notify('已切换美式声线，正在试听。');play('Hello! This is your selected American English voice.');}
  if(e.target.id==='audio-source'){state.audioSource=e.target.value;persist();notify('发音来源已更新。');}
