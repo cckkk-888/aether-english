@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#080b14" />
   <meta name="description" content="AETHER English — 美式英语沉浸式学习系统。每日自动更新、5000 高频词、音标、完整时态与语法、听力、跟读和复习。" />
-  <title>AETHER English V4 — 精确语义联想与极速美式发音</title>
+  <title>AETHER English V4.1 — 严格词义配图与即时美式朗读</title>
   <style>
 /* System font stack: no external font server required. */
 :root{font-family:Manrope,'PingFang SC',system-ui,sans-serif;color-scheme:dark;--bg:#080b14;--surface:rgba(19,23,38,.82);--surface-light:rgba(25,30,47,.84);--stroke:rgba(184,190,219,.14);--fg:#f3f1f4;--muted:#a7aab9;--faint:#797f95;--accent:#d0b48b;--accent-bright:#efcfaa;--blue:#879cda;--green:#8cccaa;--red:#e9a5a5;--glow:rgba(198,153,110,.14);--depth:0 22px 90px rgba(0,0,0,.19)}
@@ -450,23 +450,14 @@ function renderVocab(){
  const deck=dayDeck();let w=deck[wordIndex];if(!w){wordIndex=0;w=deck[0]}
  if(!w)return '<div class="empty">词库尚未加载</div>';
  const item=state.cards[w.id];
- return `${head('01 / THE VOCABULARY LAB','Make words','yours.','每天解锁约 100 个新词。每个词都有中文解释、参考音标和图形联想；Day 1–2 有 80 个精编例句。')}${sessionWidget('vocabulary')}<div class="control-row"><label class="field-control">当前学习单元 <select id="day-select">${Array.from({length:autoDay()},(_,i)=>`<option value="${i+1}" ${state.day===i+1?'selected':''}>DAY ${fmt(i+1)} ${i===0?'· Everyday Life':i===1?'· Work & Study':'· 高频词训练'}</option>`).join('')}</select></label><div class="stat-chip">${wordIndex+1} / ${deck.length} WORDS</div><div class="stat-chip">每日课程 ${maxDay} 天 · 已学 ${learned()} 个</div></div><div class="bar"><span style="width:${(wordIndex+1)/deck.length*100}%"></span></div>
+ return `${head('01 / THE VOCABULARY LAB','Make words','yours.','每天解锁约 100 个新词。每个词都有中文解释与参考音标；语义准确的词才提供图形联想，其余提供文字释义；Day 1–2 有 80 个精编例句。')}${sessionWidget('vocabulary')}<div class="control-row"><label class="field-control">当前学习单元 <select id="day-select">${Array.from({length:autoDay()},(_,i)=>`<option value="${i+1}" ${state.day===i+1?'selected':''}>DAY ${fmt(i+1)} ${i===0?'· Everyday Life':i===1?'· Work & Study':'· 高频词训练'}</option>`).join('')}</select></label><div class="stat-chip">${wordIndex+1} / ${deck.length} WORDS</div><div class="stat-chip">每日课程 ${maxDay} 天 · 已学 ${learned()} 个</div></div><div class="bar"><span style="width:${(wordIndex+1)/deck.length*100}%"></span></div>
  <div id="word-card" class="surface study-spotlight" aria-live="polite"><div class="module-eyebrow">WORD / ${fmt(wordIndex+1)} ${item?.seen?'· 已学过':'· NEW DISCOVERY'}</div><h2 class="flash-word">${escapeHTML(w.word)}</h2><div class="ipa">${escapeHTML(w.ipa)}</div>${wordArtwork(w)}<div class="btn-row" style="margin-top:16px"><button class="pill-btn" data-word-audio="${escapeHTML(w.word)}">▶ 即时美式发音</button><button class="pill-btn" data-say="${escapeHTML(w.example)}">▶ 例句</button></div><div class="word-cn" style="${showWord?'':'filter:blur(6px)'}">${escapeHTML(w.cn||'中文释义可在5000词库查看')}</div><div class="word-definition" style="${showWord?'':'filter:blur(6px)'}">${escapeHTML(w.en||'请结合中文释义和联想图记忆；英文精编释义按词完善。')}</div><div class="example">${w.example?'“'+escapeHTML(w.example)+'”':'请听原词发音，并用所学句型尝试造句。'}</div><div class="card-actions"><button class="primary-btn" data-grade="good">认识 · Good</button><button class="ghost-btn" data-grade="hard">模糊 · Hard</button><button class="outline-btn" data-grade="again">不认识 · Again</button><button class="pill-btn" data-action="toggle-word">${showWord?'隐藏释义':'显示释义'}</button></div><div class="tap-help">向左滑切换下一词，向右滑返回上一词。复习间隔根据回答自动调整。</div></div><div class="top-line" style="margin:14px 0 30px"><button class="outline-btn" data-action="word-prev" ${wordIndex===0?'disabled':''}>← 上一词</button><button class="outline-btn" data-action="word-next">下一词 →</button></div><div class="notice">首次 Good：3 天后复习；Hard：1 天；Again：1 分钟；Easy 在复习模块中可选。认识不等于永久掌握。</div>`;
 }
 // Three separate reference libraries, available without external services.
 function association(w){
- const a=w.word.toLowerCase(), cn=(w.cn||"");
- const direct={
- the:["🎯","指向明确的某一个物品"],a:["☕","桌上出现一个物品"],an:["🍎","想象一个苹果开头的发音"],i:["🙋","指向自己"],you:["🫵","指向面前的人"],we:["🤝","几个人一起做事"],they:["👥","一群人在一起"],he:["👨","一个男性人物"],she:["👩","一个女性人物"],it:["📦","指向一个物品"],
- be:["✨","一件事物正在存在"],am:["🙋‍♂️","我现在的状态"],is:["🔵","单个人或物的状态"],are:["👫","多个人的状态"],was:["🕰️","回忆过去的状态"],were:["⌛","回忆过去的多人状态"],do:["🛠️","动手把事情做完"],does:["🛠️","一个人动手做事"],go:["🚶","向目的地出发"],get:["📦","把东西拿到手"],make:["🧩","拼装成新东西"],take:["✋","伸手拿走东西"],come:["🏃","向自己走来"],want:["💭","心里想着想要的东西"],need:["❗","急需的物品"],can:["💪","有能力去完成"],will:["🗓️","未来时间轴"],would:["💬","礼貌提出请求"],could:["🙏","礼貌地寻求帮助"],should:["📌","给自己一个建议"],
- of:["🔗","两件事物之间的关系"],to:["➡️","一支箭头指向目的地"],in:["📦","小东西放进盒子里"],on:["📚","书本放在桌面上"],at:["📍","地图上一个精确位置"],for:["🎁","礼物送给某个人"],with:["🤝","两个人并肩同行"],and:["➕","把两个想法连接"],or:["↔️","摆出两个选项"],but:["↩️","转折改变方向"],if:["❔","条件出现后才行动"],that:["👉","指向远处某物"],this:["👇","指向近处某物"],there:["📍","遥远的地点"],here:["📍","此刻脚下的位置"],
- my:["🎒","属于我的背包"],your:["🎒","属于你的背包"],our:["🏡","大家共同的家"],one:["1️⃣","一件东西"],two:["2️⃣","两件东西"],three:["3️⃣","三件东西"],
- time:["⏰","滴答走动的钟表"],day:["🌞","阳光下的一天"],today:["📆","日历上圈出今天"],tomorrow:["🌅","下一天的日出"],week:["🗓️","七天排成一排"],year:["🎆","新年倒数的烟花"],work:["💻","坐在电脑前工作"],school:["🏫","清晨走进学校"],home:["🏠","回到熟悉的家"],family:["👨‍👩‍👧","家人在一起"],friend:["🫂","朋友相见拥抱"],food:["🍱","餐桌上丰富的食物"],water:["💧","透明杯子里的水"],money:["💵","拿着一张钞票"],book:["📚","书架上的一本书"],study:["📝","桌上摊开笔记"],travel:["🧳","拖着行李箱出发"],phone:["📱","手中的手机"],car:["🚗","路上的小汽车"],house:["🏡","院子里的一栋房子"],place:["📍","地图上标出地点"],people:["👥","街上的一群人"],say:["🗣️","张口说一句话"],tell:["💬","把消息告诉朋友"],think:["🧠","脑海里形成一个想法"],know:["💡","突然明白了"],see:["👀","眼睛看见东西"],look:["🔍","仔细寻找"],listen:["🎧","戴上耳机认真听"],speak:["🎙️","对着麦克风讲话"],read:["📖","翻开书页阅读"],write:["✍️","拿笔写字"],learn:["🎓","掌握一个新知识"],help:["🤲","伸出双手帮忙"],
- good:["👍","一件令人满意的事情"],bad:["👎","计划出了差错"],happy:["😃","露出开心的笑容"],new:["✨","拆开一件全新的东西"],old:["⌛","时间留下的痕迹"],big:["🐘","想到巨大的大象"],small:["🐜","想到小小的蚂蚁"],more:["➕","杯子里加更多水"],less:["➖","杯子里减少水"],very:["🔥","给程度再加一层"],really:["❗","表达真实的感受"],now:["⏱️","时钟正指向现在"],later:["➡️","把事情推迟到稍后"],before:["⏪","时间线上更早的一点"],after:["⏩","时间线上更晚的一点"],because:["🔗","连接原因与结果"],
- what:["❓","问这是什么"],who:["👤","问这个人是谁"],where:["🗺️","寻找地图上的位置"],when:["⏰","追问发生的时间"],why:["💭","思考事情的原因"],how:["🧭","寻找完成的方法"],which:["☝️","在多个物品中选一个"]
- };
-
-// 严格按英文词条一对一审核的语义插图，绝不再按照中文中某个字推断插画。
+ const a=w.word.toLowerCase();
+ // 禁止用形似、中文关键词和任意语义猜测来生成图片。
+ // 严格按英文词条一对一审核的语义插图，绝不再按照中文中某个字推断插画。
 // 优先覆盖日常真实物品、场景和动作；抽象词没有可靠图时退回文字卡。
  const verified={
  apple:["🍎","桌上放着一个红苹果"],banana:["🍌","一根弯弯的香蕉"],orange:["🍊","剥开一个橙子"],
@@ -534,8 +525,10 @@ function association(w){
  morning:["🌅","清晨日出"],afternoon:["🌤️","下午的阳光"],evening:["🌆","黄昏的天色"],night:["🌙","夜空中的月亮"],
  north:["⬆️","地图上的北方向"],south:["⬇️","地图上的南方向"],east:["➡️","地图上的东方向"],west:["⬅️","地图上的西方向"]
  };
- const verifiedItem=verified[a];
- return verifiedItem||direct[a]||null;
+ // 多义或可能与插图场景不符的词，宁可不配图，也不能错误引导记忆。
+ const ambiguous=new Set(['bank','glass','mouse','ring','watch','bat','pool','court','orange','fish','chicken','credit','film','fly','drive','cut','open','close','light','fan','spring','date','match','bill','charge']);
+ if(ambiguous.has(a))return null;
+ return verified[a]||null;
 }
 function wordArtwork(w){
  const associationData=association(w);
@@ -559,7 +552,7 @@ function renderFrequency(){
  const current=freqSelected===null?null:libraryWords[freqSelected];
  const detail=current?`<section class="surface vocab-detail" id="freq-detail"><div class="module-eyebrow">WORD DETAIL / ${current.level} / ${current.rank} OF 5000</div><h2 class="flash-word">${escapeHTML(current.word)}</h2><div class="ipa">${escapeHTML(current.ipa)}</div><div class="word-cn large-cn">${escapeHTML(current.cn)}</div>${wordArtwork(current)}${current.en?`<p class="word-definition">${escapeHTML(current.en)}</p>`:''}${current.example?`<div class="example"><strong>真实语境例句</strong><p>${escapeHTML(current.example)}</p>${current.exampleCn?`<small class="example-cn">${escapeHTML(current.exampleCn)}</small>`:''}</div>`:'<p class="voice-tips">这个词条已收录中文释义；精编英文例句仍在按词核对中。</p>'}<div class="btn-row" style="margin-top:22px"><button class="primary-btn" data-word-audio="${escapeHTML(current.word)}">▶ 即时美式发音</button>${current.example?`<button class="outline-btn" data-say="${escapeHTML(current.example)}">▶ 例句</button>`:''}<button class="ghost-btn" data-action="freq-learn" data-word-id="${current.id}">${state.cards[current.id]?.seen?'↺ 重新记忆':'✓ 记住这个词'}</button><button class="pill-btn" data-action="freq-close">收起词卡</button></div></section>`:"";
  return `${head('LIBRARY 01 / EVERYDAY ENGLISH','Words with','meaning.','5000 个分级英语单词，全部显示中文释义；点击任意单词查看中文解释、美式发音；仅展示逐词核对过的联想图，避免错误画面误导记忆。')}
- <div class="surface content-panel library-info"><div class="module-eyebrow">5,000 WORDS · A1—C1 LEARNING BANK</div><div class="grid-3" style="margin-top:17px"><div><b>5000</b><p>英汉双语词条</p></div><div><b>${libraryWords.filter(w=>state.cards[w.id]?.seen).length}</b><p>已标记学习</p></div><div><b>${autoDay()}/${maxDay}</b><p>已解锁 Day</p></div></div><p class="voice-tips">本版已更换原来混入文学人名的词表，改用 A1–C1 分级常用词整理；不是严格的美式口语频率排名。中文释义基于 ECDICT 公开英汉词典并对基础词额外校对；图片为本机生成的图形联想卡，并非逐词摄影照片。参考音标来源不同，遇到多音词请结合语音试听。</p></div>
+ <div class="surface content-panel library-info"><div class="module-eyebrow">5,000 WORDS · A1—C1 LEARNING BANK</div><div class="grid-3" style="margin-top:17px"><div><b>5000</b><p>英汉双语词条</p></div><div><b>${libraryWords.filter(w=>state.cards[w.id]?.seen).length}</b><p>已标记学习</p></div><div><b>${autoDay()}/${maxDay}</b><p>已解锁 Day</p></div></div><p class="voice-tips">本版已更换原来混入文学人名的词表，改用 A1–C1 分级常用词整理；不是严格的美式口语频率排名。中文释义基于 ECDICT 公开英汉词典并对基础词额外校对；目前只对词义匹配确切的词条显示场景示意图；多义词和未核对词汇会显示文字记忆卡，避免误导。参考音标来源不同，遇到多音词请结合语音试听。</p></div>
  <div class="surface content-panel" style="margin-top:16px"><label class="field-control" style="display:block">中英文搜索<div class="word-search-row"><input class="library-search" id="freq-search" type="search" value="${escapeHTML(freqSearch)}" placeholder="输入单词或中文，例如 apple / 苹果" autocomplete="off"/><button class="primary-btn" data-action="freq-search">搜索</button><button class="outline-btn" data-action="freq-clear">清除</button></div></label><div class="cefr-filter">${["全部","A1","A2","B1","B2","C1"].map(l=>`<button type="button" class="cefr-chip ${freqFilter===l?'active':''}" data-freq-level="${l}">${l}</button>`).join("")}</div><div class="top-line" style="margin:17px 0"><span class="stat-chip">匹配 ${filtered.length} 个英汉词条</span><span class="stat-chip">第 ${freqPage+1} / ${maxPage+1} 页</span></div>
  ${detail}
  <div class="frequency-list">${rows.map(w=>{const cue=association(w);const icon=cue?cue[0]:'◇';return `<button type="button" class="frequency-row ${freqSelected===w.rank-1?'selected':''}" data-freq="${w.rank-1}"><span class="freq-symbol" aria-hidden="true">${icon}</span><span class="freq-wordstack"><strong>${escapeHTML(w.word)}</strong><span class="freq-cn">${escapeHTML(w.cn)}</span></span><span class="freq-pron">${escapeHTML(w.ipa)}</span><span class="freq-known">${escapeHTML(w.level)} <span aria-hidden="true">↗</span></span></button>`}).join("")||'<p class="empty">没有匹配的词，试试另一种拼写或中文。</p>'}</div><div class="btn-row pagination" style="margin-top:20px"><button class="outline-btn" data-action="freq-prev" ${freqPage===0?'disabled':''}>← 上一页</button><span class="small-text muted">每页 28 词 · 词义可直接阅读</span><button class="outline-btn" data-action="freq-next" ${freqPage>=maxPage?'disabled':''}>下一页 →</button></div></div>`;
@@ -584,7 +577,7 @@ function renderPhonetics(){
  const voices=allAmericanVoices().sort((a,b)=>scoredVoice(b)-scoredVoice(a));
  const voiceOptions=voices.map(v=>`<option value="${escapeHTML(v.voiceURI)}" ${state.voiceURI===v.voiceURI?'selected':''}>${escapeHTML(v.name)}${/Premium|Enhanced|Natural/i.test(v.name)?' ★':''} — ${escapeHTML(v.lang)}</option>`).join('');
  return `${head('LIBRARY 02 / AMERICAN IPA','Hear every','sound.','美式英语常见元音、辅音、重音和语流现象，给出示范例词与发音动作。点击例词听声音，而不是把音标字符读成文字。')}
- <section class="surface content-panel"><div class="section-heading" style="margin:0 0 17px"><div><div class="section-kicker">VOICE LAB / SOUND ENGINE</div><h2>发音升级设置</h2></div></div><div class="voice-settings"><label class="field-control">发音来源<select id="audio-source"><option value="smart" ${state.audioSource==='smart'?'selected':''}>推荐：极速智能 · 已预载真人音频 / 即时美式系统语音</option><option value="system" ${state.audioSource==='system'?'selected':''}>最快响应：只用设备美式语音（离线可用）</option></select></label><label class="field-control">美式系统语音<select id="voice-select"><option value="">自动选择设备较优美式声音</option>${voiceOptions}</select></label><label class="field-control">语速 <strong id="voice-rate-value">${Number(state.voiceRate||.96).toFixed(2)} ×</strong><input id="voice-rate" type="range" min="0.7" max="1.15" step="0.05" value="${state.voiceRate||.96}"/></label></div><div class="btn-row" style="margin-top:22px"><button class="primary-btn" data-action="voice-demo">▶ 试听完整美式句子</button><button class="outline-btn" data-action="stop-audio">■ 停止</button></div><p class="voice-tips">默认不再等网络请求：有缓存时立即播美式词典录音，尚未预载的单词立即用选定的设备美式声线朗读，同时后台准备词典音频供下次播放。可在这里选择声线、调节速度，点击「试听」比较自然度。整句话仍是设备语音；自然度受 Safari 和已安装声线限制，无法在无付费语音服务的情况下保证真人音质。</p></section>
+ <section class="surface content-panel"><div class="section-heading" style="margin:0 0 17px"><div><div class="section-kicker">VOICE LAB / SOUND ENGINE</div><h2>发音升级设置</h2></div></div><div class="voice-settings"><label class="field-control">发音来源<select id="audio-source"><option value="smart" ${state.audioSource==='smart'?'selected':''}>推荐：极速智能 · 已预载真人音频 / 即时美式系统语音</option><option value="system" ${state.audioSource==='system'?'selected':''}>最快响应：只用设备美式语音（离线可用）</option></select></label><label class="field-control">美式系统语音<select id="voice-select"><option value="">自动选择设备较优美式声音</option>${voiceOptions}</select></label><label class="field-control">语速 <strong id="voice-rate-value">${Number(state.voiceRate||.96).toFixed(2)} ×</strong><input id="voice-rate" type="range" min="0.7" max="1.15" step="0.05" value="${state.voiceRate||.96}"/></label></div><div class="btn-row" style="margin-top:22px"><button class="primary-btn" data-action="voice-demo">▶ 试听当前声线</button><button class="outline-btn" data-action="voice-refresh">↻ 刷新美式声音</button><button class="outline-btn" data-action="stop-audio">■ 停止</button></div><p class="voice-tips">默认不再等网络请求：有缓存时立即播美式词典录音，尚未预载的单词立即用选定的设备美式声线朗读，同时后台准备词典音频供下次播放。可在这里选择声线、调节速度，点击「试听」比较自然度。整句话仍是设备语音；自然度受 Safari 和已安装声线限制，无法在无付费语音服务的情况下保证真人音质。</p></section>
  <div class="section-heading"><div><div class="section-kicker">IPA REFERENCE / ${R.sounds.length} ENTRIES</div><h2>音素与连读详解</h2></div></div><div class="tab-row ipa-tabs">${groups.map(g=>`<button class="tab ${phoneticGroup===g?'active':''}" data-ipa-group="${escapeHTML(g)}">${escapeHTML(g)}</button>`).join('')}</div><div class="ipa-grid">${selected.map(x=>`<article class="surface ipa-card"><div class="module-eyebrow">${escapeHTML(x.group)}</div><div class="ipa-symbol">${escapeHTML(x.ipa)}</div><div class="ipa-sample"><strong>${escapeHTML(x.example)}</strong><button class="pill-btn" data-word-audio="${escapeHTML(x.example)}">▶ 例词</button></div><p>${escapeHTML(x.tip)}</p></article>`).join('')}</div><p class="notice">不同美式地区口音可能合并 /ɑ/ 与 /ɔ/，部分教材对长元音、r 音和元音细分使用不同音标体系。此处采用常见美式宽式 IPA，例词用于听辨，不能保证 TTS 的孤立音素精确展示。</p>`;
 }
 function renderTenses(){
@@ -615,6 +608,16 @@ const dictionaryCache=new Map(),readyAudio=new Map(),pendingAudio=new Map();
 function allAmericanVoices(){return ('speechSynthesis' in window?window.speechSynthesis.getVoices():[]).filter(v=>/^en[-_]US$/i.test(v.lang));}
 function scoredVoice(v){const name=v.name||'';return (/Premium|Enhanced|Natural|Neural|Ava|Samantha|Allison|Jenny|Aria|Google US|Microsoft/i.test(name)?100:0)+(/en[-_]US/i.test(v.lang||'')?20:0)+(v.localService?4:0)}
 function voiceFor(){if(!('speechSynthesis' in window))return null;const all=window.speechSynthesis.getVoices();return all.find(v=>v.voiceURI===state.voiceURI&&/^en[-_]US$/i.test(v.lang))||allAmericanVoices().sort((a,b)=>scoredVoice(b)-scoredVoice(a))[0]||all.find(v=>/^en/i.test(v.lang))||null}
+function refreshAmericanVoices(silent=false){
+ const select=document.getElementById('voice-select');if(!select)return;
+ const voices=allAmericanVoices().sort((a,b)=>scoredVoice(b)-scoredVoice(a));
+ select.innerHTML='<option value="">自动选择设备较优美式声音</option>'+voices.map(v=>'<option value="'+escapeHTML(v.voiceURI)+'">'+escapeHTML(v.name)+' — en-US</option>').join('');
+ select.value=voices.some(v=>v.voiceURI===state.voiceURI)?state.voiceURI:'';
+ if(!silent)notify(voices.length?'找到 '+voices.length+' 个可选美式声线，可以切换并试听。':'暂未加载美式声线，可稍后点击刷新；还可在 iPhone 系统朗读声音设置中安装更自然的声音。');
+}
+if('speechSynthesis'in window){
+ try{window.speechSynthesis.addEventListener('voiceschanged',()=>{if(document.getElementById('voice-select'))refreshAmericanVoices(true)})}catch{}
+}
 function stopAudio(){if(currentAudio){try{currentAudio.pause();currentAudio.currentTime=0}catch{}currentAudio=null}if('speechSynthesis'in window)window.speechSynthesis.cancel();activeUtterance=null}
 function play(text){if(!('speechSynthesis'in window)){notify('此设备暂不支持系统朗读。请尝试 Safari 并检查系统语音设置。');return}stopAudio();const synth=window.speechSynthesis;const u=new SpeechSynthesisUtterance(String(text));u.lang='en-US';u.voice=voiceFor();u.rate=Number(state.voiceRate)||.96;u.pitch=1;u.volume=1;u.onerror=()=>{if(activeUtterance===u)notify('系统声线无法播放。请到「美式音标」切换可用的美式语音。')};activeUtterance=u;synth.speak(u)}
 // 词典网络请求永远放在点击以外的后台预载，不阻塞即时朗读。
@@ -695,6 +698,7 @@ function processAction(el){const act=el.dataset.action;
  if(act==='tense-prev'){tenseIndex=Math.max(0,tenseIndex-1);tenseChoice=null;render();return}
  if(act==='tense-next'){tenseIndex=(tenseIndex+1)%R.tenses.length;tenseChoice=null;render();return}
  if(act==='voice-demo'){play('Hey, how is your day going? I am going to practice American English with you.');return}
+ if(act==='voice-refresh'){refreshAmericanVoices();return}
  if(act==='session'){const id=el.dataset.module;if(sessionActive&&sessionModule===id){sessionActive=false;sessionModule=null}else{sessionActive=true;sessionModule=id}render();return}
  if(act==='toggle-word'){showWord=!showWord;render();return}
  if(act==='word-next'){wordIndex=(wordIndex+1)%dayDeck().length;showWord=true;render();return}
@@ -722,7 +726,7 @@ function processAction(el){const act=el.dataset.action;
 document.addEventListener('click',e=>{const el=e.target.closest('button');if(el?.dataset.action||el?.dataset.go||el?.dataset.say||el?.dataset.wordAudio||el?.dataset.freq!==undefined||el?.dataset.freqLevel!==undefined||el?.dataset.ipaGroup!==undefined||el?.dataset.tense!==undefined||el?.dataset.tenseAnswer!==undefined||el?.dataset.grade||el?.dataset.grammar!==undefined||el?.dataset.listening!==undefined||el?.dataset.scene!==undefined||el?.dataset.playLine!==undefined||el?.dataset.expression!==undefined||el?.dataset.exjump!==undefined||el?.dataset.review||el?.dataset.placement!==undefined)processAction(el)});
 document.addEventListener('change',e=>{
  if(e.target.id==='day-select'){state.day=Math.min(autoDay(),Math.max(1,Number(e.target.value)));wordIndex=0;persist();render()}
- if(e.target.id==='voice-select'){state.voiceURI=e.target.value;persist();notify('已保存美式语音偏好。');}
+ if(e.target.id==='voice-select'){state.voiceURI=e.target.value;persist();notify('已切换美式声线，正在试听。');play('Hello! This is your selected American English voice.');}
  if(e.target.id==='audio-source'){state.audioSource=e.target.value;persist();notify('发音来源已更新。');}
 });
 document.addEventListener('input',e=>{if(e.target.id==='voice-rate'){state.voiceRate=Number(e.target.value);persist();const lbl=document.getElementById('voice-rate-value');if(lbl)lbl.textContent=state.voiceRate.toFixed(2)+' ×'}});
