@@ -1,0 +1,1 @@
+window.AETHER_ED={packs:(window.AETHER_DAILY_PACKS||[]).slice().sort((a,b)=>a.id.localeCompare(b.id)),selected:"2026-10-23",answers:{},transcript:false,voice:"",escape:x=>String(x??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))};
