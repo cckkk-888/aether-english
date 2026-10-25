@@ -50,6 +50,13 @@ if("speechSynthesis" in window){
  window.speechSynthesis.getVoices();
  window.speechSynthesis.addEventListener?.("voiceschanged",()=>{if(document.getElementById("voice")&&document.getElementById("voice").options.length<=1)E.render?.()});
 }
+
+// Embedded editorial follows the main AETHER theme without modifying saved progress.
+const embedded=window.parent!==window;
+function syncEditorialTheme(theme){document.documentElement.dataset.theme=theme==='light'?'light':'dark'}
+window.addEventListener('message',event=>{if(event.origin!==location.origin||event.source!==window.parent||event.data?.type!=='aether-theme')return;syncEditorialTheme(event.data.theme)});
+function reportEditorialHeight(){if(!embedded)return;const height=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight);window.parent.postMessage({type:'aether-editorial-height',height},location.origin)}
+if(embedded){window.addEventListener('load',reportEditorialHeight);window.addEventListener('resize',reportEditorialHeight);if(window.ResizeObserver){new ResizeObserver(reportEditorialHeight).observe(document.body)}}
 const style=document.createElement("style");style.textContent=`
 :root{font-family:system-ui,-apple-system,"PingFang SC",sans-serif;color-scheme:dark;--bg:#090c14;--panel:#181d2b;--panel2:#202636;--line:#34394b;--text:#f5f3f0;--sub:#b4b8c6;--accent:#e0c49c}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-width:320px;background:radial-gradient(ellipse at 75% 0%,#242137 0%,transparent 45%),var(--bg);color:var(--text)}
@@ -65,6 +72,11 @@ label{display:block;margin:18px 0;color:var(--sub);font-size:13px}select{display
 ol{line-height:2;padding-left:22px}#daily-toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);opacity:0;transition:.25s;pointer-events:none;background:#f4e2c5;color:#222;border-radius:12px;padding:12px 18px;z-index:50;max-width:90vw}#daily-toast.show{opacity:1;transform:translate(-50%,0)}
 @media(prefers-color-scheme:light){:root{color-scheme:light;--bg:#f3f1ed;--panel:#fff;--panel2:#eee9e2;--line:#d9d2c9;--text:#252734;--sub:#646a76;--accent:#825d33}body{background:radial-gradient(ellipse at 70% 0%,#e4dfd8,transparent 50%),var(--bg)}section{background:#f9f7f3}button[data-say]{color:#73542f}}
 @media(max-width:600px){#app{padding-top:24px}section{border-radius:16px}.grid{grid-template-columns:1fr}.item{padding:15px}}
+\n/* Visual continuity with AETHER main site, scoped to the editorial page. */
+:root{--bg:#080b14;--panel:rgba(19,23,38,.82);--panel2:rgba(25,30,47,.84);--line:rgba(184,190,219,.14);--text:#f3f1f4;--sub:#a7aab9;--accent:#d0b48b}
+[data-theme=light]{color-scheme:light;--bg:#f4f2ed;--panel:rgba(255,255,255,.92);--panel2:rgba(247,245,241,.94);--line:rgba(41,45,61,.13);--text:#242532;--sub:#6b6e79;--accent:#99734a}
+body{background:transparent;color:var(--text)}#app{max-width:1200px;padding:8px clamp(12px,3vw,28px) 35px}section{background:var(--panel);border-color:var(--line);box-shadow:0 18px 55px rgba(0,0,0,.08)}.item{background:var(--panel2);border-color:var(--line)}button,select{background:var(--panel2);color:var(--text);border-color:var(--line)}button[data-say]{color:var(--accent);border-color:var(--accent)}.muted{color:var(--sub)}small{color:var(--accent)}button.good{background:rgba(80,150,115,.16);border-color:#70a58a;color:var(--text)}
+@media(max-width:600px){#app{padding:5px 8px 24px}section{padding:16px 12px;margin-top:16px;border-radius:14px}.item{padding:14px}h1{font-size:clamp(28px,8vw,39px)}}
 `;document.head.appendChild(style);
 document.addEventListener("DOMContentLoaded",()=>{if(typeof E.render==="function")E.render();else show("课程渲染脚本未加载，请刷新页面。")},{once:true});
 })();
