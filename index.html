@@ -194,7 +194,7 @@
       <nav id="primary-nav" class="nav-list">
         <a href="#home" data-page="home" class="nav-link"><span class="nav-ico">◈</span>学习总览<span class="nav-en">HOME</span></a>
         <a href="#vocabulary" data-page="vocabulary" class="nav-link"><span class="nav-ico">✦</span>每日课程 · Day 1+<span class="nav-en">DAILY</span></a>
-        <a href="./daily.html" class="nav-link" aria-label="打开最新每日精编美式英语课程"><span class="nav-ico">✧</span>每日精编 · 新课程<span class="nav-en">NEW</span></a>
+        <a href="#editorial" data-page="editorial" class="nav-link" aria-label="在主网站内学习每日精编美式英语课程"><span class="nav-ico">✧</span>每日精编 · 新课程<span class="nav-en">NEW</span></a>
         <a href="#frequency" data-page="frequency" class="nav-link"><span class="nav-ico">▤</span>高频 5000 单词<span class="nav-en">5000 WORDS</span></a>
         <a href="#phonetics" data-page="phonetics" class="nav-link"><span class="nav-ico">◌</span>美式音标学习<span class="nav-en">US IPA</span></a>
         <a href="#tenses" data-page="tenses" class="nav-link"><span class="nav-ico">≡</span>时态 · 句型公式<span class="nav-en">STRUCTURES</span></a>
@@ -430,7 +430,7 @@ if(!SL){document.body.textContent="造句与语法资料加载失败，请刷新
 if (!R || F.length!==5000) {document.body.textContent='学习资料不完整，请将 frequency.js、reference.js 和原网站文件放在同一文件夹。';return;}
 if(!D){ document.body.textContent='课程资源加载失败。请确保 data.js 与 index.html 在同一文件夹。'; return; }
 const KEY='aether-english-progress-v1';
-const pages={home:'LEARNING SPACE',vocabulary:'DAILY WORDS',frequency:'5000 WORD LIBRARY',phonetics:'AMERICAN IPA',tenses:'GRAMMAR FORMULAS',sentence:'SENTENCE BUILDER',grammarguide:'GRAMMAR ATLAS',grammar:'GRAMMAR STUDIO',listening:'LISTENING THEATER',speaking:'SPEAKING SPACE',expressions:'AMERICAN EXPRESSIONS',review:'MEMORY ENGINE',placement:'CEFR ESTIMATE',progress:'LEARNING INSIGHTS'};
+const pages={editorial:'DAILY EDITORIAL',home:'LEARNING SPACE',vocabulary:'DAILY WORDS',frequency:'5000 WORD LIBRARY',phonetics:'AMERICAN IPA',tenses:'GRAMMAR FORMULAS',sentence:'SENTENCE BUILDER',grammarguide:'GRAMMAR ATLAS',grammar:'GRAMMAR STUDIO',listening:'LISTENING THEATER',speaking:'SPEAKING SPACE',expressions:'AMERICAN EXPRESSIONS',review:'MEMORY ENGINE',placement:'CEFR ESTIMATE',progress:'LEARNING INSIGHTS'};
 const $=(s,scope=document)=>scope.querySelector(s);
 const $$=(s,scope=document)=>Array.from(scope.querySelectorAll(s));
 // All course rollovers use Beijing time at 09:00. The date of a training day is its 09:00 launch date.
@@ -496,11 +496,12 @@ function render(){
  $('#crumb-current').textContent=pages[page];$('#streak-head').textContent=`✦ ${streak()} DAYS`;
  $('#theme-toggle').textContent=state.theme==='dark'?'☀':'☾';
  document.documentElement.dataset.theme=state.theme;
- const renderers={home:renderHome,vocabulary:renderVocab,frequency:renderFrequency,phonetics:renderPhonetics,tenses:renderTenses,sentence:renderSentenceLab,grammarguide:renderGrammarAtlas,grammar:renderGrammar,listening:renderListening,speaking:renderSpeaking,expressions:renderExpressions,review:renderReview,placement:renderPlacement,progress:renderProgress};
+ const renderers={editorial:renderEditorial,home:renderHome,vocabulary:renderVocab,frequency:renderFrequency,phonetics:renderPhonetics,tenses:renderTenses,sentence:renderSentenceLab,grammarguide:renderGrammarAtlas,grammar:renderGrammar,listening:renderListening,speaking:renderSpeaking,expressions:renderExpressions,review:renderReview,placement:renderPlacement,progress:renderProgress};
  $('#main').innerHTML=`<div class="page-transition">${renderers[page]()}</div>`;
  $('#sidebar').classList.remove('open');$('#mobile-menu').setAttribute('aria-expanded','false');
  scheduleAudioPrefetch();
 }
+function renderEditorial(){return `<div class="section-kicker">AETHER / DAILY EDITORIAL</div><h1 class="page-title">每日<em>精编课程.</em></h1><p class="lede">在原版 AETHER 内学习新增美式英语课程。原有 51 天课程、音标、词库、动画和学习记录均保留。</p><div class="surface" style="margin-top:24px;overflow:hidden"><iframe title="AETHER 每日精编美式英语" src="./daily.html" loading="eager" style="display:block;width:100%;height:82vh;min-height:650px;border:0;background:transparent" allow="autoplay"></iframe></div>`}
 function renderHome(){
  const secs=totalSecs(), pct=Math.min(100,Math.round(secs/7200*100));
  return `<div class="hero"><div class="hero-text"><div class="hero-eyebrow">DAY ${fmt(autoDay())} / ${maxDay} · BEIJING TIME 09:00 RELEASE</div><h1>Speak<br/>beyond <em>limits.</em></h1><p>让语言学习成为每天最值得投入的两小时。从 Day 1 开始，每天北京时间 09:00 自动进入新课程。5000 高频词库、完整时态公式与音标训练单独成册，学习记录保存在本机。</p><div class="btn-row"><button class="primary-btn" data-go="vocabulary">开始今日课程 <span>↗</span></button><button class="ghost-btn" data-go="placement">${state.level?'重新分级测试':'先测测我的水平'} <span>↗</span></button></div></div><div class="orbital-stage" aria-hidden="true"><div class="orbit-glow"></div><div class="orbit-ring"></div><div class="orbit-ring"></div><div class="orbit-ring"></div><div class="orbit-core"></div><div class="orbit-caption">LANGUAGE IN MOTION / 2026</div></div></div>
