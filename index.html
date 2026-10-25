@@ -496,12 +496,13 @@ function render(){
  $('#crumb-current').textContent=pages[page];$('#streak-head').textContent=`✦ ${streak()} DAYS`;
  $('#theme-toggle').textContent=state.theme==='dark'?'☀':'☾';
  document.documentElement.dataset.theme=state.theme;
+ const editorialFrame=document.querySelector('iframe[title="AETHER 每日精编美式英语"]');if(editorialFrame)editorialFrame.contentWindow?.postMessage({type:'aether-theme',theme:state.theme},location.origin);
  const renderers={editorial:renderEditorial,home:renderHome,vocabulary:renderVocab,frequency:renderFrequency,phonetics:renderPhonetics,tenses:renderTenses,sentence:renderSentenceLab,grammarguide:renderGrammarAtlas,grammar:renderGrammar,listening:renderListening,speaking:renderSpeaking,expressions:renderExpressions,review:renderReview,placement:renderPlacement,progress:renderProgress};
  $('#main').innerHTML=`<div class="page-transition">${renderers[page]()}</div>`;
  $('#sidebar').classList.remove('open');$('#mobile-menu').setAttribute('aria-expanded','false');
  scheduleAudioPrefetch();
 }
-function renderEditorial(){return `<div class="section-kicker">AETHER / DAILY EDITORIAL</div><h1 class="page-title">每日<em>精编课程.</em></h1><p class="lede">在原版 AETHER 内学习新增美式英语课程。原有 51 天课程、音标、词库、动画和学习记录均保留。</p><div class="surface" style="margin-top:24px;overflow:hidden"><iframe title="AETHER 每日精编美式英语" src="./daily.html" loading="eager" style="display:block;width:100%;height:82vh;min-height:650px;border:0;background:transparent" allow="autoplay"></iframe></div>`}
+function renderEditorial(){return `<div class="section-kicker">AETHER / DAILY EDITORIAL</div><h1 class="page-title">每日<em>精编课程.</em></h1><p class="lede">在原版 AETHER 内学习新增美式英语课程。原有 51 天课程、音标、词库、动画和学习记录均保留。</p><div class="surface" style="margin-top:24px;overflow:hidden"><iframe title="AETHER 每日精编美式英语" src="./daily.html" loading="eager" style="display:block;width:100%;height:850px;min-height:650px;border:0;background:transparent" onload="this.contentWindow.postMessage({type:'aether-theme',theme:document.documentElement.dataset.theme||'dark'},location.origin)" allow="autoplay"></iframe></div>`}
 function renderHome(){
  const secs=totalSecs(), pct=Math.min(100,Math.round(secs/7200*100));
  return `<div class="hero"><div class="hero-text"><div class="hero-eyebrow">DAY ${fmt(autoDay())} / ${maxDay} · BEIJING TIME 09:00 RELEASE</div><h1>Speak<br/>beyond <em>limits.</em></h1><p>让语言学习成为每天最值得投入的两小时。从 Day 1 开始，每天北京时间 09:00 自动进入新课程。5000 高频词库、完整时态公式与音标训练单独成册，学习记录保存在本机。</p><div class="btn-row"><button class="primary-btn" data-go="vocabulary">开始今日课程 <span>↗</span></button><button class="ghost-btn" data-go="placement">${state.level?'重新分级测试':'先测测我的水平'} <span>↗</span></button></div></div><div class="orbital-stage" aria-hidden="true"><div class="orbit-glow"></div><div class="orbit-ring"></div><div class="orbit-ring"></div><div class="orbit-ring"></div><div class="orbit-core"></div><div class="orbit-caption">LANGUAGE IN MOTION / 2026</div></div></div>
@@ -901,6 +902,7 @@ $('#mobile-menu').addEventListener('click',()=>{const side=$('#sidebar');side.cl
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('#sidebar').classList.remove('open');$('#mobile-menu').setAttribute('aria-expanded','false')}});
 let touchStartX=null;document.addEventListener('touchstart',e=>{if(e.target.closest('#word-card'))touchStartX=e.changedTouches[0]?.clientX},{passive:true});document.addEventListener('touchend',e=>{if(touchStartX===null||page!=='vocabulary')return;const dx=e.changedTouches[0].clientX-touchStartX;touchStartX=null;if(Math.abs(dx)<75||e.target.closest('button'))return;wordIndex=Math.max(0,Math.min(dayDeck().length-1,wordIndex+(dx<0?1:-1)));render()},{passive:true});
 window.addEventListener('hashchange',()=>{sessionActive=false;sessionModule=null;stopAudio();try{speechRec?.stop()}catch{}recording=false;render();window.scrollTo(0,0)});
+window.addEventListener('message',e=>{if(e.origin!==location.origin||e.data?.type!=='aether-editorial-height')return;const frame=document.querySelector('iframe[title="AETHER 每日精编美式英语"]');if(frame&&e.source===frame.contentWindow){const height=Number(e.data.height);if(Number.isFinite(height)&&height>=400&&height<=30000)frame.style.height=Math.ceil(height+16)+'px'}});
 window.addEventListener('beforeunload',persist);
 // Fully local automatic course rollover. No claim of background push or server-generated teaching content.
 setInterval(()=>{if(syncAutoDay()){render();notify('北京时间 09:00 已解锁 Day '+fmt(autoDay())+' 的新单词课程。')}},30000);
