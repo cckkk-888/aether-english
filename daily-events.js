@@ -13,20 +13,28 @@ const E=window.AETHER_ED={
 };
 const save=()=>{try{localStorage.setItem(STORE,JSON.stringify({selected:E.selected,voice:E.voice,transcript:E.transcript,answers:E.answers}))}catch{}};
 function show(message){let n=document.getElementById("daily-toast");if(!n){n=document.createElement("div");n.id="daily-toast";n.setAttribute("role","status");document.body.appendChild(n)}n.textContent=message;n.classList.add("show");clearTimeout(show.timer);show.timer=setTimeout(()=>n.classList.remove("show"),3500)}
+let activeSpeech=null;
+let speechAttempt=0;
 function speak(sentence){
  if(!("speechSynthesis" in window)||!window.SpeechSynthesisUtterance){show("当前浏览器不支持系统语音朗读，请使用 Safari 或 Chrome。");return}
- try{
  const synth=window.speechSynthesis;
- synth.cancel();
- const u=new SpeechSynthesisUtterance(sentence);u.lang="en-US";u.rate=0.88;u.pitch=1;
- const vs=synth.getVoices().filter(v=>v.lang?.toLowerCase().replace("_","-").startsWith("en-us"));
- const chosen=vs.find(v=>v.voiceURI===E.voice)||vs.find(v=>v.localService)||vs[0];
- if(chosen)u.voice=chosen;
- u.onerror=e=>{if(e.error!=="interrupted"&&e.error!=="canceled")show("朗读未成功，请再点击一次或在声线菜单切换。")};
- synth.speak(u);
- if(synth.paused)synth.resume();
- }catch{show("系统语音暂不可用，请重试。")}
+ const token=++speechAttempt;
+ try{
+  synth.cancel();activeSpeech=null;
+  const u=new SpeechSynthesisUtterance(String(sentence));
+  u.lang="en-US";u.rate=0.88;u.pitch=1;u.volume=1;
+  const vs=synth.getVoices().filter(v=>/^en[-_]us$/i.test(v.lang||""));
+  const chosen=vs.find(v=>v.voiceURI===E.voice)||vs.find(v=>v.localService)||vs[0];
+  if(chosen)u.voice=chosen;
+  activeSpeech=u;
+  u.onend=()=>{if(activeSpeech===u)activeSpeech=null};
+  u.onerror=e=>{if(token!==speechAttempt)return;if(activeSpeech===u)activeSpeech=null;if(e.error!=="interrupted"&&e.error!=="canceled")show("语音未播放。请尝试切换声线，或重新点击播放。")};
+  // Keep speak() inside the user's click activation. Resume paused engines first.
+  if(synth.paused)synth.resume();
+  synth.speak(u);
+ }catch{show("系统语音暂不可用，请重试或切换声线。")}
 }
+
 document.addEventListener("click",e=>{
  const btn=e.target.closest("button");if(!btn)return;
  if(btn.hasAttribute("data-say")){speak(btn.dataset.say);return}
